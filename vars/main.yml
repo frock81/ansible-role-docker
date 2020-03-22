@@ -1,0 +1,16 @@
+cache_valid_time: 86400
+required_packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - software-properties-common
+repo_gpg_key_url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
+docker_repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
+docker_pkg: docker-ce
+docker_compose_version: 1.23.1
+docker_compose_url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64
+docker_compose_install_dir: /usr/local/bin
+docker_compose_output_file: docker-compose
+docker_compose_bash_completion_url: https://raw.githubusercontent.com/docker/compose/{{ docker_compose_version }}/contrib/completion/bash/docker-compose
+docker_compose_bash_completion_install_dir: /etc/bash_completion.d/
+docker_compose_bash_completion_output_file: docker-compose
