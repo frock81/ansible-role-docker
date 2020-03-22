@@ -1,0 +1,8 @@
+---
+# defaults/main.yml
+
+# Install docker-compose or not.
+docker___compose_install: yes
+
+# Docker-compose version to be installed.
+docker___compose_version: 1.25.4

@@ -7,19 +7,19 @@
 - name: atualizar cache apt
   apt:
     update_cache: yes
-    cache_valid_time: "{{ cache_valid_time }}"
+    cache_valid_time: "{{ ___docker___cache_valid_time }}"
 
 - name: instalar pacotes pré-requeridos
   apt:
-    name: "{{ required_packages }}"
+    name: "{{ ___docker___required_packages }}"
 
 - name: adicionar chave GPG
   apt_key:
-    url: "{{ repo_gpg_key_url }}"
+    url: "{{ ___docker___repo_gpg_key_url }}"
 
 - name: adiciona repositório apt do docker
   apt_repository:
-    repo: "{{ docker_repo }}"
+    repo: "{{ ___docker___repo }}"
   register: docker_apt_repo_add
 
 - name: atualiza cache apt quando repositório adicionado
@@ -27,22 +27,22 @@
     update_cache: yes
   when: docker_apt_repo_add.changed
 
-- name: instala pacote docker
+- name: instala pacotes docker
   apt:
-    name: "{{ docker_pkg }}"
+    name: "{{ ___docker___pkgs }}"
 
-- name: bloco docker-compose
-  block:
+- block:
     - name: baixar docker-compose
       get_url:
-        url: "{{ docker_compose_url }}"
-        dest: "{{ docker_compose_install_dir }}/{{ docker_compose_output_file }}"
+        url: "{{ ___docker___compose_url }}"
+        dest: "{{ ___docker___compose_install_dir }}/{{ ___docker___compose_output_file }}"
         mode: 0750
     - name: baixar completion
       get_url:
-        url: "{{ docker_compose_bash_completion_url }}"
-        dest: "{{ docker_compose_bash_completion_install_dir }}/{{ docker_compose_bash_completion_output_file }}"
+        url: "{{ ___docker___compose_bash_completion_url }}"
+        dest: "{{ ___docker___compose_bash_completion_install_dir }}/{{ ___docker___compose_bash_completion_output_file }}"
         mode: 0644
+  when: "{{ docker___compose_install }}"
   tags: docker_compose
 
 - name: instalar Pip
