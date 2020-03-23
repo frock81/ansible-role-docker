@@ -35,14 +35,16 @@
     - name: baixar docker-compose
       get_url:
         url: "{{ ___docker___compose_url }}"
-        dest: "{{ ___docker___compose_install_dir }}/{{ ___docker___compose_output_file }}"
+        dest: "{{ ___docker___compose_install_dir }}/\
+          {{ ___docker___compose_output_file }}"
         mode: 0750
     - name: baixar completion
       get_url:
         url: "{{ ___docker___compose_bash_completion_url }}"
-        dest: "{{ ___docker___compose_bash_completion_install_dir }}/{{ ___docker___compose_bash_completion_output_file }}"
+        dest: "{{ ___docker___compose_bash_completion_install_dir }}/\
+          {{ ___docker___compose_bash_completion_output_file }}"
         mode: 0644
-  when: "{{ docker___compose_install }}"
+  when: docker___compose_install
   tags: docker_compose
 
 - name: instalar Pip
